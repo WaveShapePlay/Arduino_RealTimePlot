@@ -3,10 +3,10 @@ import serial
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-
 def animate(i, dataList, ser):
     ser.write(b'g')                                     # Transmit the char 'g' to recive the Arduino data point
     arduinoData_string = ser.readline().decode('ascii') # Decode Recived Arduino data as a formatted string
+    #print(i)                                           # 'i' is a incrementing varable based upon frames = x argument
 
     try:
         arduinoData_float = float(arduinoData_string)   # Convert to float
@@ -25,15 +25,16 @@ def animate(i, dataList, ser):
     ax.set_ylabel("Value")                              # Set title of y axis 
 
 dataList = []                                           # Create empty list varable for later use
-fig, ax = plt.subplots()                                # Create Matplotlib plots
-
+                                                        
+fig = plt.figure()                                      # Create Matplotlib plots fig is the 'higher level' plot window
+ax = fig.add_subplot(111)                               # Add subplot to main fig window
 
 ser = serial.Serial("COM7", 9600)                       # Establish Serial object with COM port and BAUD rate to match Arduino Port/rate
 time.sleep(2)                                           # Time delay for Arduino Serial initialization 
 
                                                         # Matplotlib Animation Fuction that takes takes care of real time plot.
                                                         # Note that 'fargs' parameter is where we pass in our dataList and Serial object. 
-ani = animation.FuncAnimation(fig, animate, frames=100,fargs=(dataList, ser), interval=100) 
+ani = animation.FuncAnimation(fig, animate, frames=100, fargs=(dataList, ser), interval=100) 
 
 plt.show()                                              # Keep Matplotlib plot presistant on screen until it is closed
 ser.close()                                             # Close Serial connection when plot is closed
