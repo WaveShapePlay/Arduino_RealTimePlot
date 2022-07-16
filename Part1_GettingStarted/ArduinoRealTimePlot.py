@@ -6,7 +6,7 @@ import matplotlib.animation as animation
 def animate(i, dataList, ser):
     ser.write(b'g')                                     # Transmit the char 'g' to receive the Arduino data point
     arduinoData_string = ser.readline().decode('ascii') # Decode receive Arduino data as a formatted string
-    #print(i)                                           # 'i' is a incrementing varable based upon frames = x argument
+    #print(i)                                           # 'i' is a incrementing variable based upon frames = x argument
 
     try:
         arduinoData_float = float(arduinoData_string)   # Convert to float
@@ -36,6 +36,6 @@ time.sleep(2)                                           # Time delay for Arduino
                                                         # Note that 'fargs' parameter is where we pass in our dataList and Serial object. 
 ani = animation.FuncAnimation(fig, animate, frames=100, fargs=(dataList, ser), interval=100) 
 
-plt.show()                                              # Keep Matplotlib plot presistant on screen until it is closed
+plt.show()                                              # Keep Matplotlib plot persistent on screen until it is closed
 ser.close()                                             # Close Serial connection when plot is closed
 
