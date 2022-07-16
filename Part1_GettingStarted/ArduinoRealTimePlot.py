@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 def animate(i, dataList, ser):
-    ser.write(b'g')                                     # Transmit the char 'g' to recive the Arduino data point
-    arduinoData_string = ser.readline().decode('ascii') # Decode Recived Arduino data as a formatted string
+    ser.write(b'g')                                     # Transmit the char 'g' to receive the Arduino data point
+    arduinoData_string = ser.readline().decode('ascii') # Decode receive Arduino data as a formatted string
     #print(i)                                           # 'i' is a incrementing varable based upon frames = x argument
 
     try:
@@ -24,7 +24,7 @@ def animate(i, dataList, ser):
     ax.set_title("Arduino Data")                        # Set title of figure
     ax.set_ylabel("Value")                              # Set title of y axis 
 
-dataList = []                                           # Create empty list varable for later use
+dataList = []                                           # Create empty list variable for later use
                                                         
 fig = plt.figure()                                      # Create Matplotlib plots fig is the 'higher level' plot window
 ax = fig.add_subplot(111)                               # Add subplot to main fig window
